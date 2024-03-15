@@ -16,6 +16,7 @@ export default function NewEvent() {
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: createNewEvent,
     onSuccess: () => {
+      // it will refetch data starting all key name with this
       queryClient.invalidateQueries({ queryKey: ["events"] });
       navigate("/events");
     },
