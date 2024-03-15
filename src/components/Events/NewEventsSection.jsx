@@ -8,8 +8,16 @@ import { fetchEvents } from "../../util/http.js";
 
 export default function NewEventsSection() {
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ["events"],
-    queryFn: fetchEvents,
+    // react query important features
+
+    queryKey: ["events"], // query key used for cached data checking with same id
+    queryFn: fetchEvents, // http request function
+    staleTime: 5000, // stale time is a time when our data refetch automatically after caching loaded data default is 0 but we can define our time when http request sent using stale time
+
+    // gcTime: 1000,   // gc time is garbage collection time it means is will clear the cache data after default five minutes
+    //  as you can see we can define garbage collection time so cached data can be cleared
+
+    // note :images are  not cached by react query or react it cached by browser
   });
 
   let content;
