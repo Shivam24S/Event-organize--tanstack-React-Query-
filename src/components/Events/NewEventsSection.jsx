@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import LoadingIndicator from "../UI/LoadingIndicator.jsx";
