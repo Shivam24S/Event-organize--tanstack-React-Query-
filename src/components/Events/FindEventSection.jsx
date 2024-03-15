@@ -19,9 +19,10 @@ export default function FindEventSection() {
   // key stroke so how many time we sent request if we search something that why i used  ref for obtaining
   // user input and then sent to state as per my view i can use here only state using debouncing if i don't want to use ref
 
-  const { data, isPending, isError, error } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["events", { search: searchTerm }],
     queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }),
+    enabled: searchTerm !== undefined,
   });
 
   function handleSubmit(event) {
@@ -31,7 +32,8 @@ export default function FindEventSection() {
 
   let content = <p>please enter a search term to find Events</p>;
 
-  if (isPending) {
+  //isLoading only true when query enabled
+  if (isLoading) {
     content = <LoadingIndicator />;
   }
 
