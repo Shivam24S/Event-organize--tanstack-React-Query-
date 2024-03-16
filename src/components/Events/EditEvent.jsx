@@ -35,7 +35,7 @@ export default function EditEvent() {
 
     // now here onward i m doing optimistic update
 
-    onMutate: (data) => {
+    onMutate: async (data) => {
       // getting data from mutate
       const newData = data.event;
 
@@ -57,7 +57,9 @@ export default function EditEvent() {
       //  2.   // i want to cancel all http requests for this key  before setting data
       // if we don't do that we will get old values or new after updating
 
-      queryClient.cancelQueries({ queryKey: ["events", { id: params.id }] });
+      await queryClient.cancelQueries({
+        queryKey: ["events", { id: params.id }],
+      });
 
       //  1.   // setting query manually for instant update  first providing key where want instant update
       // second data which want to update locally we getting through mutate
@@ -143,3 +145,24 @@ export default function EditEvent() {
 
   return <Modal onClose={handleClose}>{content}</Modal>;
 }
+
+// now here i m using react router dom loader functions with react query to retrieve data
+// loader function assured that component will only be render when http request fullfil
+// it means when we have data
+
+export function loader({ params }) {
+  // same as usual here we are used fetchQuery instead of useQuery because we can't use hooks in loader
+  return queryClient.fetchQuery({
+    queryKey: ["events", { id: params.id }],
+    queryFn: ({ signal, queryKey }) => fetchEvent({ signal, ...queryKey[1] }),
+  });
+}
+
+// now i have to attach this function as loader to this component
+
+// i can retrieve data using loader in component i don't have to use useQuery then
+// but useQuery provide spacial features like caching ,isError,error, thats why i keep it
+// i have to include staleTime in useQuery so data can be refetch after our defined time
+
+// i can use action also here to send request but then we will not update optimistic
+// thats why i kept as it is
