@@ -7,10 +7,11 @@ export default function ImagePicker({ images, selectedImage, onSelect }) {
           <li
             key={image.path}
             onClick={() => onSelect(image.path)}
-            className={selectedImage === image.path ? 'selected' : undefined}
+            className={selectedImage === image.path ? "selected" : undefined}
           >
             <img
-              src={`http://localhost:3000/${image.path}`}
+              // src={`http://localhost:3000/${image.path}`}
+              src={`https://event-management-backend-rva5.onrender.com/${image.path}`}
               alt={image.caption}
             />
           </li>
