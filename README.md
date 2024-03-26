@@ -1,4 +1,5 @@
-Project Description: <a href="https://event-organize.netlify.app/">Event Organize App<a/>
+Project Description: 
+<a href="https://event-organize.netlify.app/">* Event Organize App<a/>
 
 The Event Organize App is a sophisticated web application developed using React.js and the Tanstack, specifically React Query, for efficient data management and API communication. This application serves as a comprehensive platform for users to plan, organize, and manage various events seamlessly.
 
