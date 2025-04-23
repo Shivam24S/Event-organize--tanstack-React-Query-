@@ -20,6 +20,7 @@ export default function EventDetails() {
     queryKey: ["event", { id: params.id }],
     queryFn: ({ signal }) => fetchEvent({ signal, id: params.id }),
   });
+  // console.log("id", params.id);
 
   const {
     mutate,
@@ -32,7 +33,7 @@ export default function EventDetails() {
       queryClient.invalidateQueries({
         queryKey: ["event"],
         // it will not refetch immediately after delete data
-        refetchType: "none",
+        // refetchType: "none",
       });
       navigate("/events");
     },

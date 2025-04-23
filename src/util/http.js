@@ -89,6 +89,7 @@ export async function fetchEvent({ id, signal }) {
   // const response = await fetch(`http://localhost:3000/events/${id}`, {
   //   signal,
   // });
+  console.log("id", id);
   const response = await fetch(
     `https://event-management-backend-rva5.onrender.com/${id}`,
     {
